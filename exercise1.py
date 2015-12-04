@@ -5,11 +5,10 @@
 This module performs table operations on database tables
 implemented as lists of lists. """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoront.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca "
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
-
 
 #####################
 # HELPER FUNCTIONS ##
@@ -53,8 +52,40 @@ def selection(t, f):
 
     """
 
-    return []
+def union(table1, table2):
+    """
+    Perform the union set operation on tables, table1 and table2.
+    :param table1: a table (a List of Lists)
+    :param table2: a table (a List of Lists)
+    :return: the resulting table
+    :raises: MismatchedAttributesException:
+        if tables t1 and t2 don't have the same attributes
+    """
+    new_table = []
 
+    # Schema match check:
+    if table1[0] == table2[0]:
+        # Append header row
+        new_table.append(table1[0])
+
+        # Matching table1 rows to table2
+        for t1_row in table1[1:]:
+            if t1_row not in table2 or t1_row not in new_table:
+                new_table.append(t1_row)
+
+        # Matching table2 rows to table1
+        for t2_row in table2[1:]:
+            if t2_row not in table1 or t2_row not in new_table:
+                new_table.append(t2_row)
+    else:
+        raise MismatchedAttributesException("Bad Schema.")
+
+    # 2015-11-06 update: if no common rows, should return nothing
+    if len(new_table) < 2:
+        # new_table = []
+        return None
+
+    return new_table
 
 def projection(t, r):
     """

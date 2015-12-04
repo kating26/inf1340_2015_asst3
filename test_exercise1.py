@@ -6,9 +6,9 @@ Test module for exercise3.py
 
 """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoront.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca"
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
 
 from exercise1 import selection, projection, cross_product

@@ -2,10 +2,10 @@
 
 """ Module to test papers.py  """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoront.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca"
 
-__copyright__ = "2014 Susan Sim"
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
 
 __status__ = "Prototype"
