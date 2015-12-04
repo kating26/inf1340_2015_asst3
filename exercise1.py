@@ -51,7 +51,7 @@ def selection(t, f):
     [["A", "B", "C"], [4, 5, 6]]
 
     """
-
+#From Assignment 2
 def union(table1, table2):
     """
     Perform the union set operation on tables, table1 and table2.
@@ -86,7 +86,31 @@ def union(table1, table2):
         return None
 
     return new_table
+# End of Assignment 2
 
+# Work from inforum
+t = EMPLOYEES = [["Surname", "FirstName", "Age", "Salary"],
+             ["Smith", "Mary", 25, 2000],
+             ["Black", "Lucy", 40, 3000],
+             ["Verdi", "Nico", 36, 4500],
+             ["Smith", "Mark", 40, 3900]]
+# Define function f that returns True iff the last element in the row is greater than 30.
+def f(row): row[-1] > 30
+select(row, f)
+[["Surname", "FirstName", "Age", "Salary"]]
+
+def selection (t, f):
+    f = {}
+    result = []
+    for row in t:
+        if tuple(row) not in f:
+            result.append(row)
+            d[tuple(row)] = True
+
+        return result
+
+selection(t, f)
+#end of work from inforum
 def projection(t, r):
     """
     Perform projection operation on table t
