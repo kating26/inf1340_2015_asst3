@@ -38,7 +38,7 @@ class UnknownAttributeException(Exception):
     pass
 
 
-def selection(t, f):
+def selection(table, function):
     """
     Perform select operation on table t that satisfy condition f.
 
@@ -53,10 +53,10 @@ def selection(t, f):
     """
 #Probable solution for selection
     new_table = []
-    new_table.append(t[0])
-    for a in xrange(1, len(t)):
-        if f(t[a]):
-            new_table.append(t[a])
+    new_table.append(table[0])
+    for a in xrange(1, len(table)):
+        if function(table[a]):
+            new_table.append(table[a])
     return new_table
 
 
