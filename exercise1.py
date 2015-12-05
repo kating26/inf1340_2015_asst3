@@ -38,7 +38,7 @@ class UnknownAttributeException(Exception):
     pass
 
 
-def selection(table, function):
+def selection(t, f):
     """
     Perform select operation on table t that satisfy condition f.
 
@@ -53,10 +53,10 @@ def selection(table, function):
     """
 #Probable solution for selection
     new_table = []
-    new_table.append(table[0])
-    for a in xrange(1, len(table)):
-        if function(table[a]):
-            new_table.append(table[a])
+    new_table.append(t[0])
+    for a in xrange(1, len(t)):
+        if f(t[a]):
+            new_table.append(t[a])
     return new_table
 
 
@@ -120,6 +120,9 @@ def selection (t, f):
 
 selection(t, f)
 #end of work from inforum
+
+
+#Probable solution for projection
 def projection(t, r):
     """
     Perform projection operation on table t
@@ -131,10 +134,18 @@ def projection(t, r):
     [["A", "C"], [1, 3], [4, 6]]
 
     """
+    projction_table = []
+    new_table = []
+    for a in xrange(len(t[0])):
+        for n in xrange(len(r)):
+            if r[n] == t[0][a]:
+                projction_table.append(a)
+    for x in xrange(len(t)):
+        new_table.append([t[x][index] for index in projction_table])
+    return new_table
+    
 
-    return []
-
-
+#Probable solution for cross_product
 def cross_product(t1, t2):
     """
     Return the cross-product of tables t1 and t2.
@@ -146,6 +157,10 @@ def cross_product(t1, t2):
 
 
     """
-
-    return []
+    new_table = []
+    for n in xrange(1, len(t1)):
+        for a in xrange(1, len(t2)):
+            new_table.append(t1[n]+t2[a])
+    new_table.insert(0, t1[0] + t2[0])
+    return new_table
 
