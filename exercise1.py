@@ -51,6 +51,15 @@ def selection(t, f):
     [["A", "B", "C"], [4, 5, 6]]
 
     """
+#Probable solution for selection
+    new_table = []
+    new_table.append(t[0])
+    for a in xrange(1, len(t)):
+        if f(t[a]):
+            new_table.append(t[a])
+    return new_table
+
+
 #From Assignment 2
 def union(table1, table2):
     """
