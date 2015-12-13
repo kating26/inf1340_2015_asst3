@@ -54,7 +54,7 @@ def filter_students(row):
     34000 for tuition.
     :param row: A List in the format:
         [{Surname}, {FirstName}, {Age}, {Tuition}]
-    :return: True if the row satisfies the condition.
+    :return: True if the row satisfies the conditions.
     """
     return row[-2] >= 25 and row[-1] > 34000
 
