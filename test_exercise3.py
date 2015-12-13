@@ -50,8 +50,8 @@ def is_equal(t1, t2):
 def filter_students(row):
     """
     Check if student represented by row
-    is AT LEAST 30 years old and pays for tuition
-    MORE THAN 34000.
+    is AT LEAST 30 years old and pays MORE THAN
+    34000 for tuition.
     :param row: A List in the format:
         [{Surname}, {FirstName}, {Age}, {Tuition}]
     :return: True if the row satisfies the condition.
@@ -65,7 +65,7 @@ def filter_students(row):
 
 def test_selection():
     """
-    Test select operation.
+    Test selection operation.
     """
 
     result = [["Surname", "FirstName", "Age", "Tuition"],
