@@ -14,7 +14,7 @@ __license__ = "MIT License"
 # HELPER FUNCTIONS ##
 #####################
 
-def remove_duplicates(l):
+
     """
     Removes duplicates from l, where l is a List of Lists.
     :param l: a List
