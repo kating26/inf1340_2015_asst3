@@ -47,7 +47,7 @@ def is_equal(t1, t2):
 #####################
 # FILTER FUNCTIONS ##
 #####################
-def filter_employees(row):
+def filter_students(row):
     """
     Check if student represented by row
     is AT LEAST 30 years old and pays for tuition
