@@ -72,14 +72,14 @@ def projection(t, r):
     [["A", "C"], [1, 3], [4, 6]]
 
     """
-    projction_table = []
+    projection_table = []
     new_table = []
     for a in xrange(len(t[0])):
         for n in xrange(len(r)):
             if r[n] == t[0][a]:
-                projction_table.append(a)
+                projection_table.append(a)
     for x in xrange(len(t)):
-        new_table.append([t[x][index] for index in projction_table])
+        new_table.append([t[x][index] for index in projection_table])
     return new_table
     
 
