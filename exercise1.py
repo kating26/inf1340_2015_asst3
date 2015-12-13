@@ -51,7 +51,7 @@ def selection(t, f):
     [["A", "B", "C"], [4, 5, 6]]
 
     """
-#Probable solution for selection
+
     new_table = []
     new_table.append(t[0])
     for a in xrange(1, len(t)):
@@ -60,7 +60,6 @@ def selection(t, f):
     return new_table
 
 
-#Probable solution for projection
 def projection(t, r):
     """
     Perform projection operation on table t
@@ -83,7 +82,6 @@ def projection(t, r):
     return new_table
     
 
-#Probable solution for cross_product
 def cross_product(t1, t2):
     """
     Return the cross-product of tables t1 and t2.
