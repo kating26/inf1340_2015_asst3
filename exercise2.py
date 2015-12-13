@@ -31,11 +31,6 @@ containing the following keys:
 '''
 COUNTRIES = None
 
-
-"""
-importing and making json files readable, naming different parts so that different functions can access them
-"""
-
 with open("test_jsons/test_returning_citizen.json", "r") as file_reader:
     file_contents = file_reader.read()
     json_citizens = json.loads(file_contents)
@@ -77,7 +72,9 @@ def is_more_than_x_years_ago(x, date_string):
 
     return (date - x_years_ago).total_seconds() > 0
 
-def decide(input_file, countries_file):
+def read_file(filename):
+    """
+    Read the content of file given by filename
     """
      Assess whether entry into Kanadia is accepted
     :param input_file: JSON formatted file with contains cases to decide
