@@ -190,9 +190,6 @@ def check_visa(traveler, valid_visa_format):
 
     if traveler['home']['country'] == "KAN":
         return True
-    else:
-
-
 
 def quarantine_traveler(traveler, country):
     """
