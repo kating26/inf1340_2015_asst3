@@ -93,10 +93,5 @@ def cross_product(t1, t2):
 
 
     """
-    new_table = []
-    for n in xrange(1, len(t1)):
-        for a in xrange(1, len(t2)):
-            new_table.append(t1[n]+t2[a])
-    new_table.insert(0, t1[0] + t2[0])
-    return new_table
+    
 
