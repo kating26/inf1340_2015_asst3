@@ -39,7 +39,7 @@ COUNTRIES = None
 #####################
 def is_more_than_x_years_ago(x, date_string):
     """
-    Check if date is less than x years ago.
+    Check if visa date is less than x years ago.
 
     :param x: int representing years
     :param date_string: a date string in format "YYYY-mm-dd"
@@ -108,11 +108,7 @@ def decide(input_file, countries_file):
         from_country = COUNTRIES[traveller['from']['country']]
         if from_country['medical_advisory']:
             print(traveller['entry_reason'])
-
-
-
-
-    return ["Reject"] 
+    return ["Reject"]
 
 
 def valid_passport_format(passport_number):
@@ -127,6 +123,7 @@ def valid_passport_format(passport_number):
         return False
     else:
         return True
+
 
 def valid_visa_format(visa_code):
     """
@@ -143,6 +140,7 @@ def valid_visa_format(visa_code):
     else:
         return True
 
+
 def valid_date_format(date_string):
     """
     Checks whether a date has the format YYYY-mm-dd in numbers
@@ -156,6 +154,7 @@ def valid_date_format(date_string):
         return False
     else:
         return True
+
 
 def valid_visa(visa):
     return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
