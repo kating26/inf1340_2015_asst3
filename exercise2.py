@@ -82,31 +82,39 @@ def decide(input_file, countries_file):
     travellers = json.loads(file_contents)
 
     for traveller in travellers:
-        status = 'Accept';
+        status = ''
 
-        #1. check to see if required fields were provided
+        # 1. check to see if required fields were provided
         for required_field in REQUIRED_FIELDS:
-            if(required_field not in traveller) :
+            if(required_field not in traveller):
                 status = 'Reject'
 
-        #2. if location is known - home & from location
-        if(traveller['home']['country'] not in COUNTRIES or traveller['from']['country'] not in COUNTRIES):
+        # 2. if location is known - home & from location
+        if traveller['home']['country'] not in COUNTRIES or traveller['from']['country'] not in COUNTRIES:
             status = 'Reject'
 
-        #3. if home country is KAN
+        # 3. if home country is KAN
         if(traveller['home']['country'] == 'KAN'):
             status = 'Accept'
-        elif(traveller['entry_reason'] == 'visiting'):
-            country = COUNTRIES[traveller['home']['country']]
-            print(country['visitor_visa_required'])
 
+        # 4. if traveller is visiting
+        if traveller['entry_reason'] == 'visiting':
+            home_country = COUNTRIES[traveller['home']['country']]
+            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REFJECT
+            if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
+                status = 'Reject'
+            else:
+                status = 'Accept'
 
+        # 5
+        from_country = COUNTRIES[traveller['from']['country']]
+        if(from_country['medical_advisory'])
         print(traveller['entry_reason'])
 
 
 
 
-    return ["Reject"]
+    return ["Reject"] 
 
 
 def valid_passport_format(passport_number):
@@ -122,8 +130,6 @@ def valid_passport_format(passport_number):
     else:
         return True
 
-
-
 def valid_visa_format(visa_code):
     """
     Checks whether a visa code is two groups of five alphanumeric characters
@@ -132,6 +138,12 @@ def valid_visa_format(visa_code):
 
     """
 
+    visa_regex = re.compile(r'\w{5}-\w{5}-\w{5}-\w{5}-\w{5}')
+    visa_match = visa_regex.search(visa_code)
+    if visa_match is None:
+        return False
+    else:
+        return True
 
 def valid_date_format(date_string):
     """
@@ -147,6 +159,7 @@ def valid_date_format(date_string):
     else:
         return True
 
-
+def valid_visa(visa):
+    return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
 
 decide('./test_jsons/test_returning_citizen.json', './test_jsons/countries.json')
