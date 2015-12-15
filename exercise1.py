@@ -5,11 +5,10 @@
 This module performs table operations on database tables
 implemented as lists of lists. """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoront.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca "
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
-
 
 #####################
 # HELPER FUNCTIONS ##
@@ -45,7 +44,7 @@ def selection(t, f):
 
     Example:
     > R = [["A", "B", "C"], [1, 2, 3], [4, 5, 6]]
-    ># Define function f that returns True iff
+    ># Define function f that returns True if
     > # the last element in the row is greater than 3.
     > def f(row): row[-1] > 3
     > select(R, f)
@@ -53,7 +52,12 @@ def selection(t, f):
 
     """
 
-    return []
+    new_table = []
+    new_table.append(t[0])
+    for a in xrange(1, len(t)):
+        if f(t[a]):
+            new_table.append(t[a])
+    return new_table
 
 
 def projection(t, r):
@@ -67,9 +71,16 @@ def projection(t, r):
     [["A", "C"], [1, 3], [4, 6]]
 
     """
-
-    return []
-
+    projection_table = []
+    new_table = []
+    for a in xrange(len(t[0])):
+        for n in xrange(len(r)):
+            if r[n] == t[0][a]:
+                projection_table.append(a)
+    for x in xrange(len(t)):
+        new_table.append([t[x][index] for index in projection_table])
+    return new_table
+    
 
 def cross_product(t1, t2):
     """
@@ -82,6 +93,10 @@ def cross_product(t1, t2):
 
 
     """
-
-    return []
+    new_table = []
+    for n in xrange(1, len(t1)):
+        for a in xrange(1, len(t2)):
+            new_table.append(t1[n]+t2[a])
+    new_table.insert(0, t1[0] + t2[0])
+    return new_table
 
