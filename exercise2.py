@@ -1,5 +1,3 @@
-__author__ = 'Hana'
-
 #!/usr/bin/env python3
 
 """ Assignment 3, Exercise 2, INF1340, Fall, 2015. Kanadia
@@ -8,9 +6,9 @@ Computer-based immigration office for Kanadia
 
 """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoront.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca "
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
 
 import re
@@ -86,7 +84,7 @@ def decide(input_file, countries_file):
 
         # 1. check to see if required fields were provided
         for required_field in REQUIRED_FIELDS:
-            if(required_field not in traveller):
+            if required_field not in traveller:
                 status = 'Reject'
 
         # 2. if location is known - home & from location
@@ -94,13 +92,13 @@ def decide(input_file, countries_file):
             status = 'Reject'
 
         # 3. if home country is KAN
-        if(traveller['home']['country'] == 'KAN'):
+        if traveller['home']['country'] == 'KAN':
             status = 'Accept'
 
         # 4. if traveller is visiting
         if traveller['entry_reason'] == 'visiting':
             home_country = COUNTRIES[traveller['home']['country']]
-            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REFJECT
+            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REJECT
             if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
                 status = 'Reject'
             else:
@@ -108,8 +106,8 @@ def decide(input_file, countries_file):
 
         # 5
         from_country = COUNTRIES[traveller['from']['country']]
-        if(from_country['medical_advisory'])
-        print(traveller['entry_reason'])
+        if from_country['medical_advisory']:
+            print(traveller['entry_reason'])
 
 
 
