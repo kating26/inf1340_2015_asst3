@@ -1,3 +1,5 @@
+__author__ = 'Hana'
+
 #!/usr/bin/env python3
 
 """ Assignment 3, Exercise 2, INF1340, Fall, 2015. Kanadia
@@ -66,6 +68,44 @@ def decide(input_file, countries_file):
         "Accept", "Reject", and "Quarantine"
     """
 
+    # Pulls countries from JSON file
+    with open(countries_file, "r") as file_reader:
+        file_contents = file_reader.read()
+    COUNTRIES = json.loads(file_contents)
+
+    # Testing that countries pulled from JSON file and are in a nice list form
+    # print json.dumps(COUNTRIES, indent=1)
+
+    # Pulls traveller information from JSON file
+    with open(input_file, "r") as file_reader:
+        file_contents = file_reader.read()
+    travellers = json.loads(file_contents)
+
+    for traveller in travellers:
+        status = 'Accept';
+
+        #1. check to see if required fields were provided
+        for required_field in REQUIRED_FIELDS:
+            if(required_field not in traveller) :
+                status = 'Reject'
+
+        #2. if location is known - home & from location
+        if(traveller['home']['country'] not in COUNTRIES or traveller['from']['country'] not in COUNTRIES):
+            status = 'Reject'
+
+        #3. if home country is KAN
+        if(traveller['home']['country'] == 'KAN'):
+            status = 'Accept'
+        elif(traveller['entry_reason'] == 'visiting'):
+            country = COUNTRIES[traveller['home']['country']]
+            print(country['visitor_visa_required'])
+
+
+        print(traveller['entry_reason'])
+
+
+
+
     return ["Reject"]
 
 
@@ -75,7 +115,13 @@ def valid_passport_format(passport_number):
     :param passport_number: alpha-numeric string
     :return: Boolean; True if the format is valid, False otherwise
     """
-    return False
+    passport_regex = re.compile(r'(\w{5}-){4}\w{5}')
+    passport_match = passport_regex.search(passport_number)
+    if passport_match is None:
+        return False
+    else:
+        return True
+
 
 
 def valid_visa_format(visa_code):
@@ -94,4 +140,13 @@ def valid_date_format(date_string):
     :return: Boolean True if the format is valid, False otherwise
     """
 
-    return False
+    date_regex = re.compile(r'\d\d\d\d-\d\d-\d\d')
+    date_match = date_regex.search(date_string)
+    if date_match is None:
+        return False
+    else:
+        return True
+
+
+
+decide('./test_jsons/test_returning_citizen.json', './test_jsons/countries.json')
