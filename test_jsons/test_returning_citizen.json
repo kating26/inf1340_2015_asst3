@@ -152,6 +152,11 @@
       "city": "Richmond Hill",
       "region": "ON",
       "country": "KAN"
+    },
+    "via": {
+      "city": "Los Angeles",
+      "region": "EK",
+      "country": "EKJ"
     }
   }
 ]
