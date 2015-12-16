@@ -14,8 +14,8 @@ import pytest
 import os
 from exercise2 import *
 
-DIR = "test_jsons/"
-os.chdir(DIR)
+#DIR = "test_jsons/"
+#os.chdir(DIR)
 
 
 def test_returning():
