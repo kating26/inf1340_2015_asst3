@@ -8,9 +8,9 @@ Computer-based immigration office for Kanadia
 
 """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
+__author__ = 'Hana Nagel, Liana Sukaisyan and Katherine Ing'
+__email__ = "hana.nagel@mail.utoronto.ca; liana.sukiasyan@mail.utoronto.ca; k.ing@mail.utoronto.ca"
+__copyright__ = "2015 Hana Nagel, Liana Sukaisyan and Katherine Ing"
 __license__ = "MIT License"
 
 import re
