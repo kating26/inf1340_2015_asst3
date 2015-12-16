@@ -83,6 +83,7 @@ def decide(input_file, countries_file):
 
     for traveller in travellers:
         status = ''
+    # If more than one distinct immigration decision, status priority: 1) quarantine 2) reject 3) accept
 
         # 1. check to see if required fields were provided
         for required_field in REQUIRED_FIELDS:
@@ -97,24 +98,26 @@ def decide(input_file, countries_file):
         if(traveller['home']['country'] == 'KAN'):
             status = 'Accept'
 
-        # 4. if traveller is visiting
+        # 4. if traveller is visiting, check if home country needs passport, then check if have visa, then check visa
         if traveller['entry_reason'] == 'visiting':
             home_country = COUNTRIES[traveller['home']['country']]
-            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REFJECT
+            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REJECT
             if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
                 status = 'Reject'
             else:
                 status = 'Accept'
 
-        # 5
-        from_country = COUNTRIES[traveller['from']['country']]
-        if(from_country['medical_advisory'])
-        print(traveller['entry_reason'])
+        # 5 traveller coming from country with medical advisory, then quarantine
+        if traveller['from'] ['country'] == 'medical_advisory':
+            home_country = COUNTRIES[traveller['home']['country']]
+            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REJECT
+            if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
+                status = 'Reject'
 
 
 
 
-    return ["Reject"] 
+    return ["Reject"]
 
 
 def valid_passport_format(passport_number):
@@ -138,7 +141,7 @@ def valid_visa_format(visa_code):
 
     """
 
-    visa_regex = re.compile(r'\w{5}-\w{5}-\w{5}-\w{5}-\w{5}')
+    visa_regex = re.compile(r'\w{5}-\w{5}')
     visa_match = visa_regex.search(visa_code)
     if visa_match is None:
         return False
@@ -162,4 +165,4 @@ def valid_date_format(date_string):
 def valid_visa(visa):
     return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
 
-decide('./test_jsons/test_returning_citizen.json', './test_jsons/countries.json')
+#decide('./test_jsons/test_returning_citizen.json', './test_jsons/countries.json')
