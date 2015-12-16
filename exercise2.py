@@ -80,44 +80,44 @@ def decide(input_file, countries_file):
     with open(input_file, "r") as file_reader:
         file_contents = file_reader.read()
     travellers = json.loads(file_contents)
-
+    statuses = []
     for traveller in travellers:
         status = ''
     # If more than one distinct immigration decision, status priority: 1) quarantine 2) reject 3) accept
 
         # 1. check to see if required fields were provided
-        for required_field in REQUIRED_FIELDS:
-            if(required_field not in traveller):
-                status = 'Reject'
-
-        # 2. if location is known - home & from location
-        if traveller['home']['country'] not in COUNTRIES or traveller['from']['country'] not in COUNTRIES:
+        if not has_required_fields(traveller):
             status = 'Reject'
 
-        # 3. if home country is KAN
-        if(traveller['home']['country'] == 'KAN'):
+        if not valid_passport_format(traveller['passport']):
+            status = "Reject"
+
+        if not valid_date_format(traveller['birth_date']):
+            status = "Reject"
+
+        # 2. ensure locations are known & valid
+        # check from & home locations
+        if not known_country(traveller['from']) or not known_country(traveller['home']) or ('via' in traveller and not known_country(traveller['via'])) or ('visa' in traveller and not known_country(traveller['visa'])):
+            status = 'Reject'
+
+        # 3. accept KAN
+        if traveller['home']['country'] == 'KAN' and status != 'Reject':
             status = 'Accept'
 
         # 4. if traveller is visiting, check if home country needs passport, then check if have visa, then check visa
-        if traveller['entry_reason'] == 'visiting':
-            home_country = COUNTRIES[traveller['home']['country']]
-            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REJECT
-            if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
-                status = 'Reject'
-            else:
-                status = 'Accept'
+        if traveller['entry_reason'] == 'visiting' and valid_visitor(traveller) and status != 'Reject':
+            status = 'Accept'
+        else:
+            status = 'Reject'
 
-        # 5 traveller coming from country with medical advisory, then quarantine
-        if traveller['from'] ['country'] == 'medical_advisory':
-            home_country = COUNTRIES[traveller['home']['country']]
-            # if visa is required and (you don't have a visa OR your visa is invalid) ---- REJECT
-            if home_country['visitor_visa_required'] == 1 and ('visa' not in traveller or not valid_visa(traveller['visa'])):
-                status = 'Reject'
+        # 5. first checks if traveller is travelling through a quarantine country ...
+        # second checks if traveller is coming from a quarantine country.
+        if ('via' in traveller and COUNTRIES[traveller['via']['country']]['medical_advisory'] == 1) or COUNTRIES[traveller['from']['country']]['medical_advisory'] == 1:
+            status = 'Quarantine'
 
+        statuses.append(status)
 
-
-
-    return ["Reject"]
+    return statuses
 
 
 def valid_passport_format(passport_number):
@@ -165,4 +165,19 @@ def valid_date_format(date_string):
 def valid_visa(visa):
     return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
 
-#decide('./test_jsons/test_returning_citizen.json', './test_jsons/countries.json')
+def has_required_fields(traveller):
+    for required_field in REQUIRED_FIELDS:
+        if(required_field not in traveller):
+            return False
+
+    return True
+
+def known_country(country):
+    return country['country'] in COUNTRIES
+
+def valid_visitor(traveller):
+    visa_required = COUNTRIES[traveller['home']['country']]['visitor_visa_required'] == 1
+    if visa_required and ('visa' not in traveller or not valid_visa(traveller['visa'])):
+        return False
+    else:
+        return True

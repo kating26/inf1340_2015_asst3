@@ -51,6 +51,7 @@
     }
   },
   {
+<<<<<<< Updated upstream
     "passport": "FWO9A-B8MDF-TGXW5-H49SO-HI5VE",
     "first_name": "VICKI",
     "last_name": "NOYES",
@@ -69,6 +70,39 @@
       "city": "a",
       "region": "a",
       "country": "JIK"
+=======
+    "passport": "I7LWE-N5O9P-HDNAG-1JGF1-WR44S",
+    "first_name": "BEYONCE",
+    "last_name": "KNOWLES",
+    "birth_date": "1936-03-25",
+    "home": {
+      "city": "Houston",
+      "region": "NU",
+      "country": "ELE"
+    },
+    "entry_reason": "returning",
+    "from": {
+      "city": "a",
+      "region": "a",
+      "country": "LUG"
+    }
+  },
+  {
+    "passport": "I7LWE-N5O9P-HDNAG-1JGF1-WR44S",
+    "first_name": "SEAN",
+    "last_name": "CARTER",
+    "birth_date": "1936-03-25",
+    "home": {
+      "city": "Brooklyn",
+      "region": "NU",
+      "country": "LUG"
+    },
+    "entry_reason": "visiting",
+    "from": {
+      "city": "a",
+      "region": "a",
+      "country": "LUG"
+>>>>>>> Stashed changes
     }
   }
 ]
