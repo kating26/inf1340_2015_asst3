@@ -24,6 +24,21 @@ def test_returning():
     """
     assert decide("test_returning_citizen.json", "countries.json") ==\
         ["Accept", "Accept", "Quarantine"]
+        
+def test_valid_passport_formatt():
+    """
+    Tests whether a passport number is five sets of five alpha-number characters separated by dashes
+    """
+    assert (valid_passport_format('KG65G-239FM-3D9G3-4K4R3-3LFK3')) == True
+    assert (valid_passport_format('')) == False
+    assert (valid_passport_format('@#$$#-@$#$3-@$#$@-@#$@$-^%$^%')) == False
+    assert (valid_passport_format('KDSJ-SKJF3-SK234-DK12')) == False
+    assert (valid_passport_format('416-444-4444')) == False
+    assert (valid_passport_format('KG65G_239FM_3D9G3_DK4R3_3LFK3')) == False
+    assert (valid_passport_format('1-2-3-4-5')) == False
+    assert (valid_passport_format('a-b-c-d-e')) == False
+    assert (valid_passport_format('!-!-!-!-!')) == False
+    assert (valid_passport_format('happy')) == False
 
 def test_valid_date_format():
     """
