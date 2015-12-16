@@ -51,7 +51,6 @@
     }
   },
   {
-<<<<<<< Updated upstream
     "passport": "FWO9A-B8MDF-TGXW5-H49SO-HI5VE",
     "first_name": "VICKI",
     "last_name": "NOYES",
@@ -70,7 +69,7 @@
       "city": "a",
       "region": "a",
       "country": "JIK"
-=======
+    },
     "passport": "I7LWE-N5O9P-HDNAG-1JGF1-WR44S",
     "first_name": "BEYONCE",
     "last_name": "KNOWLES",
@@ -102,7 +101,57 @@
       "city": "a",
       "region": "a",
       "country": "LUG"
->>>>>>> Stashed changes
+    }
+  },
+    {
+    "passport": "JG4F8-S5E5G-AS55E-AS6E5-A65EH",
+    "first_name": "HAL",
+    "last_name": "RUDNIK",
+    "birth_date": "1975-09-16",
+    "home": {
+      "city": "Los Angeles",
+      "region": "CA",
+      "country": "UWP"
+    },
+    "entry_reason": "visiting",
+    "from": {
+      "city": "Austin",
+      "region": "PL",
+      "country": "WIV"
+    }
+  },
+  {
+    "passport": "G4R5B-R8B1N-FER5H-W5T1S-AW2R5",
+    "first_name": "ROBIN",
+    "last_name": "MURPHY",
+    "birth_date": "1949-07-01",
+    "home": {
+      "city": "Peterborough",
+      "region": "ON",
+      "country": "KAN"
+    },
+    "entry_reason": "returning",
+    "from": {
+      "city": "Siberia",
+      "region": "EO",
+      "country": "RUS"
+    }
+],
+  {
+    "passport": "5G4N8-W5R4H-Q5R4H-KK5MU-PI152",
+    "first_name": "LUPITA",
+    "last_name": "NYONG'O",
+    "birth_date": "1983-03-01",
+    "home": {
+      "city": "Mexico City",
+      "region": "FED",
+      "country": "MEX"
+    },
+    "entry_reason": "visiting",
+    "from": {
+      "city": "Richmond Hill",
+      "region": "ON",
+      "country": "KAN"
     }
   }
 ]
