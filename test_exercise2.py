@@ -59,22 +59,15 @@ def test_valid_visa_format():
 
 def test_valid_date_format():
     """
-    Test if the date is valid for a visitor visa
+    Tests whether a date has the format YYYY-mm-dd in numbers
     """
     assert (valid_date_format('April 30, 2020')) == False
     assert (valid_date_format('')) == False
+    assert (valid_date_format("Happy!")) == False
+    assert (valid_date_format('13-13-13')) == False
+    assert (valid_date_format('30-04-1967')) == False
+    assert (valid_date_format('1967.30.04')) == False
+    assert (valid_date_format('1967/30/04')) == False
     assert (valid_date_format('1967-30-04')) == True
     assert (valid_date_format('2016-30-04')) == True
-
-def test_valid_visa_format():
-    """
-    Test if the visa code is valid
-    """
-    assert (valid_passport_format('KG65G-239FM-3D9G3-4K4R3-3LFK3')) == True
-    assert (valid_passport_format('')) == False
-    assert (valid_passport_format('@#$$#-@$#$3-@$#$@-@#$@$-^%$^%')) == False
-    assert (valid_passport_format('KDSJ-SKJF3-SK234-DK12')) == False
-    assert (valid_passport_format('416-444-4444')) == False
-    assert (valid_passport_format('KG65G_239FM_3D9G3_DK4R3_3LFK3')) == False
-    assert (valid_date_format('happy')) == False
 
