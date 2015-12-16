@@ -85,8 +85,8 @@ def decide(input_file, countries_file):
         status = ''
     # If more than one distinct immigration decision, status priority: 1) quarantine 2) reject 3) accept
 
-        # 1. check to see if required fields were provided
-        if not has_required_fields(traveller):
+        # 1. check to see if required fields were provided / are correct
+        if not has_validated_fields(traveller):
             status = 'Reject'
 
         if not valid_passport_format(traveller['passport']):
@@ -118,6 +118,8 @@ def decide(input_file, countries_file):
         statuses.append(status)
 
     return statuses
+
+# Add str.lower so that no entry is rejected if there is a mismatch between uppercase and lowercase
 
 
 def valid_passport_format(passport_number):
@@ -165,12 +167,18 @@ def valid_date_format(date_string):
 def valid_visa(visa):
     return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
 
-def has_required_fields(traveller):
+def has_validated_fields(traveller):
     for required_field in REQUIRED_FIELDS:
-        if(required_field not in traveller):
-            return False
+        try:
+            if len(traveller[required_field]) <= 0:
+                is_valid_record = False
+                break
+        except:
+            is_valid_record = False
+            break
 
-    return True
+    return is_valid_record
+
 
 def known_country(country):
     return country['country'] in COUNTRIES
