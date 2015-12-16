@@ -25,6 +25,17 @@ def test_returning():
     assert decide("test_returning_citizen.json", "countries.json") ==\
         ["Accept", "Accept", "Quarantine"]
         
+######################
+# MAIN FUNCTIONS #
+######################
+
+# Accept
+
+# Reject
+
+# Quarantine
+
+        
 def test_valid_passport_formatt():
     """
     Tests whether a passport number is five sets of five alpha-number characters separated by dashes
@@ -61,6 +72,8 @@ def test_valid_date_format():
     """
     Tests whether a date has the format YYYY-mm-dd in numbers
     """
+    assert (valid_date_format('1967-30-04')) == True
+    assert (valid_date_format('2016-30-04')) == True
     assert (valid_date_format('April 30, 2020')) == False
     assert (valid_date_format('')) == False
     assert (valid_date_format("Happy!")) == False
@@ -68,6 +81,5 @@ def test_valid_date_format():
     assert (valid_date_format('30-04-1967')) == False
     assert (valid_date_format('1967.30.04')) == False
     assert (valid_date_format('1967/30/04')) == False
-    assert (valid_date_format('1967-30-04')) == True
-    assert (valid_date_format('2016-30-04')) == True
+    assert (valid_date_format('-7/+7/*7')) == False
 
