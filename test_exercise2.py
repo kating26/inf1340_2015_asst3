@@ -40,6 +40,23 @@ def test_valid_passport_formatt():
     assert (valid_passport_format('!-!-!-!-!')) == False
     assert (valid_passport_format('happy')) == False
 
+def test_valid_visa_format():
+    """
+    Tests whether a visa code is two groups of five alphanumeric characters
+    """
+    assert (valid_visa_format('ABCD1-ABCD5')) == True
+    assert (valid_visa_format('abcd1-abcd5')) == True
+    assert (valid_visa_format('')) == False
+    assert (valid_visa_format('!! !!')) == False
+    assert (valid_visa_format('123123123123')) == False
+    assert (valid_visa_format('abcabcabcabc')) == False
+    assert (valid_visa_format('a1b2c3d4e5f6'))  == False
+    assert (valid_visa_format('1234 abcd')) == False
+    assert (valid_visa_format('12345 abcde')) == False
+    assert (valid_visa_format('12ab3 abcd4')) == False
+    assert (valid_visa_format('abc12 123ab')) == False
+
+
 def test_valid_date_format():
     """
     Test if the date is valid for a visitor visa
