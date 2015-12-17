@@ -1,5 +1,3 @@
-__author__ = 'Hana'
-
 #!/usr/bin/env python3
 
 """ Assignment 3, Exercise 2, INF1340, Fall, 2015. Kanadia
@@ -16,6 +14,7 @@ __license__ = "MIT License"
 import re
 import datetime
 import json
+import os
 
 ######################
 ## global constants ##
@@ -56,6 +55,11 @@ def is_more_than_x_years_ago(x, date_string):
 
 
 def decide(input_file, countries_file):
+    base = os.path.dirname(os.path.realpath(__file__)) + '/test_jsons/'
+    countries_file = base + countries_file
+    input_file = base + input_file
+    global COUNTRIES
+
     """
     Decides whether a traveller's entry into Kanadia should be accepted
 
@@ -97,22 +101,22 @@ def decide(input_file, countries_file):
 
         # 2. ensure locations are known & valid
         # check from & home locations
-        if not known_country(traveller['from']) or not known_country(traveller['home']) or ('via' in traveller and not known_country(traveller['via'])) or ('visa' in traveller and not known_country(traveller['visa'])):
+        if not known_country(traveller['from']) or not known_country(traveller['home']) or ('via' in traveller and not known_country(traveller['via'])):
             status = 'Reject'
 
         # 3. accept KAN
-        if traveller['home']['country'] == 'KAN' and status != 'Reject':
+        if status != 'Reject' and traveller['home']['country'] == 'KAN':
             status = 'Accept'
 
         # 4. if traveller is visiting, check if home country needs passport, then check if have visa, then check visa
-        if traveller['entry_reason'] == 'visiting' and valid_visitor(traveller) and status != 'Reject':
+        if status != 'Reject' and traveller['entry_reason'] == 'visiting' and valid_visitor(traveller):
             status = 'Accept'
         else:
             status = 'Reject'
 
         # 5. first checks if traveller is travelling through a quarantine country ...
         # second checks if traveller is coming from a quarantine country.
-        if ('via' in traveller and COUNTRIES[traveller['via']['country']]['medical_advisory'] == 1) or COUNTRIES[traveller['from']['country']]['medical_advisory'] == 1:
+        if ('via' in traveller and traveller['via']['country'] in COUNTRIES and COUNTRIES[traveller['via']['country']]['medical_advisory'] == 1) or (traveller['from']['country'] in COUNTRIES and COUNTRIES[traveller['from']['country']]['medical_advisory']) == 1:
             status = 'Quarantine'
 
         statuses.append(status)
@@ -169,6 +173,7 @@ def valid_visa(visa):
     return valid_visa_format(visa['code']) and valid_date_format(visa['date']) and not is_more_than_x_years_ago(2, visa['date'])
 
 def has_validated_fields(traveller):
+    is_valid_record = True
     for required_field in REQUIRED_FIELDS:
         #required_field.lower()
         try:
@@ -191,3 +196,6 @@ def valid_visitor(traveller):
         return False
     else:
         return True
+
+
+print decide("test_returning_citizen.json", "countries.json")
