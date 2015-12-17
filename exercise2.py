@@ -130,6 +130,7 @@ def valid_passport_format(passport_number):
     """
     passport_regex = re.compile(r'(\w{5}-){4}\w{5}')
     passport_match = passport_regex.search(passport_number)
+    #passport_match.lower()
     if passport_match is None:
         return False
     else:
@@ -169,6 +170,7 @@ def valid_visa(visa):
 
 def has_validated_fields(traveller):
     for required_field in REQUIRED_FIELDS:
+        #required_field.lower()
         try:
             if len(traveller[required_field]) <= 0:
                 is_valid_record = False
