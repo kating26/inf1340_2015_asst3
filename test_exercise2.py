@@ -23,8 +23,8 @@ def test_returning():
     Travellers are returning to KAN.
     """
     assert decide("test_returning_citizen.json", "countries.json") ==\
-        ["Accept", "Accept", "Quarantine"]
-        
+        ['Reject', 'Reject', 'Reject', 'Reject', 'Accept', 'Reject', 'Reject', 'Reject']
+
 ######################
 # MAIN FUNCTIONS #
 ######################
@@ -35,8 +35,8 @@ def test_returning():
 
 # Quarantine
 
-        
-def test_valid_passport_format():
+
+def test_valid_passport_formatt():
     """
     Tests whether a passport number is five sets of five alpha-number characters separated by dashes
     """
