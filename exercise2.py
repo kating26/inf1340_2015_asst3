@@ -1,5 +1,3 @@
-__author__ = 'Hana'
-
 #!/usr/bin/env python3
 
 """ Assignment 3, Exercise 2, INF1340, Fall, 2015. Kanadia
