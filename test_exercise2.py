@@ -36,7 +36,7 @@ def test_returning():
 # Quarantine
 
         
-def test_valid_passport_formatt():
+def test_valid_passport_format():
     """
     Tests whether a passport number is five sets of five alpha-number characters separated by dashes
     """
