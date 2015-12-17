@@ -36,11 +36,12 @@ def test_returning():
 # Quarantine
 
         
-def test_valid_passport_formatt():
+def test_valid_passport_format():
     """
     Tests whether a passport number is five sets of five alpha-number characters separated by dashes
     """
     assert (valid_passport_format('KG65G-239FM-3D9G3-4K4R3-3LFK3')) == True
+    assert (valid_passport_format('kg65G-239fM-3D9G3-4k4R3-3lFK3')) == True
     assert (valid_passport_format('')) == False
     assert (valid_passport_format('@#$$#-@$#$3-@$#$@-@#$@$-^%$^%')) == False
     assert (valid_passport_format('KDSJ-SKJF3-SK234-DK12')) == False
@@ -56,6 +57,7 @@ def test_valid_visa_format():
     Tests whether a visa code is two groups of five alphanumeric characters
     """
     assert (valid_visa_format('ABCD1-ABCD5')) == True
+    assert (valid_visa_format('abCD1-ABcd5')) == True
     assert (valid_visa_format('abcd1-abcd5')) == True
     assert (valid_visa_format('')) == False
     assert (valid_visa_format('!! !!')) == False
@@ -83,3 +85,8 @@ def test_valid_date_format():
     assert (valid_date_format('1967/30/04')) == False
     assert (valid_date_format('-7/+7/*7')) == False
 
+
+def test_valid_visitor():
+    result = [["passport", "first_name", "last_name", "birth_date"],
+              ["JMZ0S-89IA9-OTCLY-MQILJ-P7CTY", "ELIZABETH", "WENDT", "1958-08-22"],
+              ["I7LWE-N5O9P-HDNAG-1JGF1-WR44S", "VENITA", "CULP", "1936-03-25"]]
