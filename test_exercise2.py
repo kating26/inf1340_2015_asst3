@@ -83,3 +83,8 @@ def test_valid_date_format():
     assert (valid_date_format('1967/30/04')) == False
     assert (valid_date_format('-7/+7/*7')) == False
 
+
+def test_valid_visitor():
+    result = [["passport", "first_name", "last_name", "birth_date"],
+              ["JMZ0S-89IA9-OTCLY-MQILJ-P7CTY", "ELIZABETH", "WENDT", "1958-08-22"],
+              ["I7LWE-N5O9P-HDNAG-1JGF1-WR44S", "VENITA", "CULP", "1936-03-25"]]
